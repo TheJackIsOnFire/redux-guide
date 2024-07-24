@@ -6,7 +6,7 @@ import Cart from "../cart/index";
 
 // Styles
 import * as Styles from "./styles";
-import { loginUser, logoutUser } from "../../redux/user/actions";
+import { login, logout } from "../../redux/user/slice";
 import { selectProductsCount } from "../../redux/cart/cart.selectors";
 
 // Utilities
@@ -30,13 +30,13 @@ function Header() {
   //Lembre-se que a action e um objeto
   //Fazendo login
   const handleLoginClick = () => {
-    dispatch(loginUser({ name: "jack", email: "jackonfire@gmail.com" }));
+    dispatch(login({ name: "jack", email: "jackonfire@gmail.com" }));
   };
 
   //Fazendo logout
   //O payload e opcional
   const handleLogoutClick = () => {
-    dispatch(logoutUser());
+    dispatch(logout());
   };
 
   return (

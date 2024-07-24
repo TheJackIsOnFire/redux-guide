@@ -6,7 +6,8 @@ import CustomButton from "../custom-button/index";
 
 // Styles
 import * as Styles from "./styles";
-import { addProductToCart } from "../../redux/cart/actions";
+//import { addProductToCart } from "../../redux/cart/actions"; <-- importação para usar o redux padrão
+import { addProduct } from "../../redux/cart/slice";
 
 // Utilities
 
@@ -14,7 +15,7 @@ const ProductItem = ({ product }) => {
   const dispatch = useDispatch(); //Criando um evendo/ação de diapatch
 
   const handleProductClick = () => {
-    dispatch(addProductToCart(product)); //Adicionando um produto pelo payload
+    dispatch(addProduct(product)); //Ultilizando o redux toolkit
   };
 
   return (

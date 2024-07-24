@@ -7,15 +7,15 @@ import * as Styles from "./styles";
 import {
   decreaseProductQuantity,
   increaseProductQuantity,
-  removeProductFromCart,
-} from "../../redux/cart/actions";
+  removeProduct,
+} from "../../redux/cart/slice";
 
 const CartItem = ({ product }) => {
   const dispatch = useDispatch();
 
   //Remover item do carrinho
   const handleRemoveClick = () => {
-    dispatch(removeProductFromCart(product.id));
+    dispatch(removeProduct(product.id));
   };
 
   //Aumentar a quantidade do item no carrinho
