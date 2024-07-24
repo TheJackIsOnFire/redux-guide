@@ -1,30 +1,40 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 // Components
 import Cart from "../cart/index";
 
 // Styles
 import * as Styles from "./styles";
+import { loginUser, logoutUser } from "../../redux/user/actions";
+import { selectProductsCount } from "../../redux/cart/cart.selectors";
 
 // Utilities
-import { loginUser, logoutUser } from "../../redux/user/actions";
 
 function Header() {
   const [cartIsVisible, setCartIsVisible] = useState(false);
 
-  const dispatch = useDispatch();
+  //Acessando o reduce por meio do useSelector
+  const { currentUser } = useSelector((rootReducer) => rootReducer.useReducer);
 
-  const { currentUser } = useSelector((state) => state.userReducer);
+  //Soma a quantidade de itens adicionados no carrinho
+  const productsCount = useSelector(selectProductsCount);
+
+  const dispatch = useDispatch(); //Chamando o useDispatch
 
   const handleCartClick = () => {
     setCartIsVisible(true);
   };
 
+  //Configurando  a action para fazer o dispatch
+  //Lembre-se que a action e um objeto
+  //Fazendo login
   const handleLoginClick = () => {
-    dispatch(loginUser({ name: "Felipe Rocha", email: "felipe@rocha.com" }));
+    dispatch(loginUser({ name: "jack", email: "jackonfire@gmail.com" }));
   };
 
+  //Fazendo logout
+  //O payload e opcional
   const handleLogoutClick = () => {
     dispatch(logoutUser());
   };
@@ -38,8 +48,7 @@ function Header() {
         ) : (
           <div onClick={handleLoginClick}>Login</div>
         )}
-
-        <div onClick={handleCartClick}>Carrinho</div>
+        <div onClick={handleCartClick}>Carrinho ({productsCount})</div>
       </Styles.Buttons>
 
       <Cart isVisible={cartIsVisible} setIsVisible={setCartIsVisible} />
